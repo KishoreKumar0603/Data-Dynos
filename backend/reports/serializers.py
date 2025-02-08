@@ -4,4 +4,12 @@ from .models import EnvironmentalIssue
 class EnvironmentalIssueSerializer(serializers.ModelSerializer):
     class Meta:
         model = EnvironmentalIssue
-        fields = '__all__'
+        fields = ['id', 'image', 'description']
+
+
+
+
+# class EnvironmentalIssueSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = EnvironmentalIssue
+#         fields = '__all__'
