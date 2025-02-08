@@ -40,7 +40,7 @@ const Login = () => {
                         <label>Password:</label>
                         <input type="password" name="password" placeholder="Enter your password" required onChange={handleChange} />
 
-                        <div className="text-center pt-2">
+                        <div className="text-center pt-4">
                             <button className="btn mb-1 text-center" type="submit">LOGIN</button>
                             <p>Don't have an account? <a href="/signup">SIGNUP</a></p>
                             <p>{message}</p>

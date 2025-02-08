@@ -1,39 +1,58 @@
-#signup{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 90vh;
-}
 
 .row{
     border-radius: 20px;
     box-shadow: 1px 1px 5px 0px
 }
 
-#signupcon{
-    width: 400px;
-}
-#signupcon,#signupcon form{
+#signup{
     display: flex;
-    flex-direction: column;
-    /* gap: 0px; */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-#signupcon form input{
-    border: 1px solid rgb(198, 198, 198);
-    padding: 8px 10px;
+#login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh; /* Full height of the viewport */
+}
+
+#logincon,#signupcon {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    /* background: #ffffff;
     border-radius: 10px;
-    margin-bottom: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center; */
 }
 
-#signupcon form label{
-    padding-bottom: 3px;
+#logincon form input,#signupcon form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-#signupcon form button{
-    background-color: black;
+#logincon form button,#signupcon form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #000000;
     color: white;
-    width: 110px;
-    padding: 5px;
-    border-radius: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
+
+#logincon form p,#signupcon form p {
+    margin-top: 10px;
+}
+
+#logincon form a,#signupcon form a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+
