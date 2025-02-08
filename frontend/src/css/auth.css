@@ -2,16 +2,38 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    height: 90vh;
 }
 
 .row{
-    border: 1px solid;
-    border-radius: 10pxb;
+    border-radius: 20px;
+    box-shadow: 1px 1px 5px 0px
 }
 
+#signupcon{
+    width: 400px;
+}
 #signupcon,#signupcon form{
     display: flex;
     flex-direction: column;
     /* gap: 0px; */
+}
+
+#signupcon form input{
+    border: 1px solid rgb(198, 198, 198);
+    padding: 8px 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+#signupcon form label{
+    padding-bottom: 3px;
+}
+
+#signupcon form button{
+    background-color: black;
+    color: white;
+    width: 110px;
+    padding: 5px;
+    border-radius: 20px;
 }

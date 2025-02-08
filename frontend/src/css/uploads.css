@@ -15,3 +15,14 @@
     flex-direction: column;
     gap: 20px;
 }
+#upcon textarea{
+    border-radius: 10px;
+    width: 100%;
+    
+}
+/* .img-thumbnail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+} */
