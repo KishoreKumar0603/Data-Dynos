@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "../css/uploads.css";
 
 const Upload = () => {
   const [image, setImage] = useState(null);
@@ -32,14 +33,20 @@ const Upload = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <h2>Upload an Environmental Issue</h2>
-      <input type="file" accept="image/*" onChange={handleImageChange} className="form-control my-3" />
-      {preview && <img src={preview} alt="Preview" className="img-thumbnail mb-3" style={{ maxWidth: "300px" }} />}
-      <button className="btn btn-primary" onClick={handleUpload}>
-        Upload
-      </button>
-      {uploadStatus && <p className="mt-3">{uploadStatus}</p>}
+    <div className="container mt-4" id="upload">
+      <div className="row p-4">
+        <div className="col-md-12" id="upcon">
+          <h2>Upload an Environmental Issue</h2>
+          <input type="file" accept="image/*" onChange={handleImageChange} className="form-control my-3" />
+          {preview && <img src={preview} alt="Preview" className="img-thumbnail mb-3" style={{ maxWidth: "300px" }} />}
+          <button className="btn btn-primary" onClick={handleUpload}>
+            Upload
+          </button>
+          {uploadStatus && <p className="mt-3">{uploadStatus}</p>}
+        </div>
+
+      </div>
+
     </div>
   );
 };
