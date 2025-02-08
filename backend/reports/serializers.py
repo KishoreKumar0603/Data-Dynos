@@ -4,9 +4,7 @@ from .models import EnvironmentalIssue
 class EnvironmentalIssueSerializer(serializers.ModelSerializer):
     class Meta:
         model = EnvironmentalIssue
-        fields = ['id', 'image', 'description']
-
-
+        fields = ['id', 'image', 'description', 'latitude', 'longitude', 'address']
 
 
 # class EnvironmentalIssueSerializer(serializers.ModelSerializer):

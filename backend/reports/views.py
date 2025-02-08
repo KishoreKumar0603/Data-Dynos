@@ -1,20 +1,17 @@
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
 from rest_framework import generics
+from rest_framework.parsers import MultiPartParser, FormParser
 from .models import EnvironmentalIssue
 from .serializers import EnvironmentalIssueSerializer
-from rest_framework.parsers import MultiPartParser, FormParser
 
-@method_decorator(csrf_exempt, name='dispatch')  # Temporarily disable CSRF for debugging
 class EnvironmentalIssueCreateView(generics.CreateAPIView):
     queryset = EnvironmentalIssue.objects.all()
     serializer_class = EnvironmentalIssueSerializer
     parser_classes = (MultiPartParser, FormParser)
 
-    def dispatch(self, request, *args, **kwargs):
-        print(f"🔍 Received {request.method} request at {request.path}")  # Debugging log
-        return super().dispatch(request, *args, **kwargs)
+    def perform_create(self, serializer):
+        """Custom save function to log and store data."""
+        print("🔍 Received Data:", self.request.data)  # Debugging Log
+        serializer.save()
 
 
 

@@ -3,6 +3,9 @@ from django.db import models
 class EnvironmentalIssue(models.Model):
     image = models.ImageField(upload_to="uploads/")
     description = models.TextField(blank=True, null=True)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, null=False, blank=False, default="11.061180")
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=False, blank=False, default="77.034660")
+    address = models.TextField(blank=False, null=False, default="Coimbatore")
 
     def __str__(self):
         return f"Environmental Issue - {self.id}"
