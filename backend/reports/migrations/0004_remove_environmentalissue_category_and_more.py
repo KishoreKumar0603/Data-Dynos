@@ -10,36 +10,4 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='environmentalissue',
-            name='category',
-        ),
-        migrations.RemoveField(
-            model_name='environmentalissue',
-            name='confidence_score',
-        ),
-        migrations.RemoveField(
-            model_name='environmentalissue',
-            name='reported_at',
-        ),
-        migrations.AddField(
-            model_name='environmentalissue',
-            name='address',
-            field=models.TextField(default='Coimbatore'),
-        ),
-        migrations.AddField(
-            model_name='environmentalissue',
-            name='description',
-            field=models.TextField(blank=True, null=True),
-        ),
-        migrations.AddField(
-            model_name='environmentalissue',
-            name='latitude',
-            field=models.DecimalField(decimal_places=6, default='11.061180', max_digits=9),
-        ),
-        migrations.AddField(
-            model_name='environmentalissue',
-            name='longitude',
-            field=models.DecimalField(decimal_places=6, default='77.034660', max_digits=9),
-        ),
     ]
