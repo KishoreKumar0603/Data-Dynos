@@ -14,9 +14,12 @@ SECRET_KEY = 'django-insecure-%6%zz7+r$&o=6f--a(=na0^7^rhxrb6tl6i1##^4kk&^uqxoye
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-
+# Allow requests from React frontend
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+CSRF_TRUSTED_ORIGINS = ["http://localhost:5173"]
+CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]
+CORS_ALLOW_CREDENTIALS = True
+    
 # Application definition
 
 INSTALLED_APPS = [
@@ -30,10 +33,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'reports',
 ]
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-]
-
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',

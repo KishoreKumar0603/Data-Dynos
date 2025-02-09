@@ -10,46 +10,32 @@ from io import BytesIO
 processor = AutoImageProcessor.from_pretrained("taroii/pothole-detection-model")
 model = AutoModelForImageClassification.from_pretrained("taroii/pothole-detection-model")
 
-# Hardcoded image path
-image_path = "a1.jpg"  # Replace with your hardcoded image path
-image = Image.open(image_path)
+def detect_pothole(image_file):
+    image = Image.open(image_file)
+    inputs = processor(images=image, return_tensors="pt")
+    outputs = model(**inputs)
+    predicted_class = outputs.logits.argmax(-1).item()
+    print(f"Predicted class: {predicted_class}")
+    return predicted_class
 
-# Preprocess the image
-inputs = processor(images=image, return_tensors="pt")
 
-# Run the model to make predictions
-outputs = model(**inputs)
-
-# Get the predicted class
-predicted_class = outputs.logits.argmax(-1).item()
-
-# Print the predicted class
-print(f"Predicted class: {predicted_class}")
-
-# Function to assign priority based on the prediction
 def assign_priority(predicted_class):
     if predicted_class == 1:
         return "Normal"
     return None  # You can change this based on other predictions
 
-priority_label = assign_priority(predicted_class)
 
-# Latitude and Longitude of the detected issue (example coordinates)
-latitude = 11.0611  # Example latitude
-longitude = 77.0346  # Example longitude
+def send_email_to_admin(image_file,predicted_class):
+    priority_label = assign_priority(predicted_class)
 
-# Google Maps link for the location
-google_maps_link = f"https://www.google.com/maps?q={latitude},{longitude}"
-user_name = "Kishore Kumar S" 
-user_phone = "9043479026"
-
-def send_email_to_admin(image_file):
-    admin_email = "kkishore51565@gmail.com"  # Replace with the admin's email
-    sender_email = "kishorekumars5643@gmail.com"  # Replace with your email
-    password = "dlku apwt kqhl eyxy" # Use an app password or an SMTP password (not your main email password)
-    
-    # Formal complaint email content
-    category = "Pothole" if predicted_class == 1 else None  # Based on predicted class
+    latitude = 11.0611  # Example latitude
+    longitude = 77.0346  # Example longitude
+    user_name = "Kishore Kumar S" 
+    user_phone = "9043479026"
+    admin_email = "kkishore51565@gmail.com"
+    sender_email = "kishorekumars5643@gmail.com"  
+    password = "dlku apwt kqhl eyxy" 
+    category = "Pothole" if predicted_class == 1 else None
     subject = f"Complaint: Environmental Hazard Detected - {category}"
     
     body = f"""
@@ -102,10 +88,4 @@ def send_email_to_admin(image_file):
     except Exception as e:
         print(f"Error occurred: {e}")
 
-# If the prediction class is 1, send the email
-if predicted_class == 1:
-    print("New environmental issue detected, sending formal complaint email to admin...")
-    
-    # Open the image and send it as email attachment
-    with open(image_path, 'rb') as image_file:
-        send_email_to_admin(image_file)
+
