@@ -11,7 +11,7 @@ processor = AutoImageProcessor.from_pretrained("taroii/pothole-detection-model")
 model = AutoModelForImageClassification.from_pretrained("taroii/pothole-detection-model")
 
 # Hardcoded image path
-image_path = "a2.jpg"  # Replace with your hardcoded image path
+image_path = "a1.jpg"  # Replace with your hardcoded image path
 image = Image.open(image_path)
 
 # Preprocess the image
@@ -33,14 +33,24 @@ def assign_priority(predicted_class):
     return None  # You can change this based on other predictions
 
 priority_label = assign_priority(predicted_class)
+
+# Latitude and Longitude of the detected issue (example coordinates)
+latitude = 11.0611  # Example latitude
+longitude = 77.0346  # Example longitude
+
+# Google Maps link for the location
+google_maps_link = f"https://www.google.com/maps?q={latitude},{longitude}"
+user_name = "Kishore Kumar S" 
+user_phone = "9043479026"
+
 def send_email_to_admin(image_file):
-    admin_email = "kishorekumars5643@gmail.com"  # Replace with the admin's email
-    sender_email = "kkishore51565@gmail.com"  # Replace with your email
+    admin_email = "kkishore51565@gmail.com"  # Replace with the admin's email
+    sender_email = "kishorekumars5643@gmail.com"  # Replace with your email
     password = "dlku apwt kqhl eyxy" # Use an app password or an SMTP password (not your main email password)
     
     # Formal complaint email content
     category = "Pothole" if predicted_class == 1 else None  # Based on predicted class
-    subject = f"Formal Complaint: Environmental Hazard Detected - {category}"
+    subject = f"Complaint: Environmental Hazard Detected - {category}"
     
     body = f"""
     Dear Sir/Madam,
@@ -51,11 +61,17 @@ def send_email_to_admin(image_file):
     The attached image provides a clear view of the situation. It is crucial that this matter be addressed promptly to prevent any further accidents or complications. 
     As a responsible citizen, I urge you to prioritize the resolution of this environmental hazard.
 
-    **Priority**: {priority_label}
+    Priority: {priority_label}
+    
+    Location: You can view the location of the environmental hazard here: [ Location ](https://www.google.com/maps?q={latitude},{longitude})
     
     We look forward to your swift action in addressing this pressing concern.
 
     Thank you for your prompt attention to this matter.
+
+    Sincerely,
+    {user_name}  
+    Phone: {user_phone}
     """
 
     # Create the email

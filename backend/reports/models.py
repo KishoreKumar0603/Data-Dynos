@@ -11,21 +11,13 @@ class EnvironmentalIssue(models.Model):
         return f"Environmental Issue - {self.id}"
 
 
+class PublicUser(models.Model):
+    username = models.CharField(max_length=255, unique=True)
+    aadhaar_number = models.CharField(max_length=12, unique=True)  # Aadhaar numbers are 12 digits
+    phone_number = models.CharField(max_length=15)  # Depending on your validation needs, you may adjust the length
+    city = models.CharField(max_length=100)
+    password = models.CharField(max_length=255)  # Store the hashed password
+    created_at = models.DateTimeField(auto_now_add=True)  # Track when the user was created
 
-# from django.db import models
-
-# class EnvironmentalIssue(models.Model):
-#     CATEGORY_CHOICES = [
-#         ('deforestation', 'Deforestation'),
-#         ('plastic_pollution', 'Plastic Pollution'),
-#         ('illegal_dumping', 'Illegal Dumping'),
-#         ('oil_spill', 'Oil Spill'),
-#     ]
-
-#     image = models.ImageField(upload_to='reports/')
-#     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, blank=True, null=True)
-#     confidence_score = models.FloatField(blank=True, null=True)
-#     reported_at = models.DateTimeField(auto_now_add=True)
-
-#     def __str__(self):
-#         return f"{self.category} ({self.confidence_score}%)"
+    def __str__(self):
+        return self.username
