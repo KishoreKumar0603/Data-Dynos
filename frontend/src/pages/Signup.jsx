@@ -31,11 +31,12 @@ const Signup = () => {
         try {
             const response = await axios.post("http://127.0.0.1:8000/api/accounts/register/", {
                 username: formData.username,
-                aadhaar_number: formData.aadhaarNumber,
-                phone_number: formData.phoneNumber,
+                aadhaar_number: formData.aadhaarNumber,  // ✅ Now matches backend
+                phone_number: formData.phoneNumber,      // ✅ Now matches backend
                 city: formData.city,
                 password: formData.password
             });
+            
 
             if (response.status === 201) {
                 setMessage("Registration successful! Redirecting...");
