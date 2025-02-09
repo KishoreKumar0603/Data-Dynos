@@ -13,11 +13,10 @@ class EnvironmentalIssue(models.Model):
 
 class PublicUser(models.Model):
     username = models.CharField(max_length=255, unique=True)
-    aadhaar_number = models.CharField(max_length=12, unique=True)  # Aadhaar numbers are 12 digits
-    phone_number = models.CharField(max_length=15)  # Depending on your validation needs, you may adjust the length
+    aadhaar_number = models.CharField(max_length=12, unique=True)
+    phone_number = models.CharField(max_length=15)
     city = models.CharField(max_length=100)
-    password = models.CharField(max_length=255)  # Store the hashed password
-    created_at = models.DateTimeField(auto_now_add=True)  # Track when the user was created
-
+    password = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.username

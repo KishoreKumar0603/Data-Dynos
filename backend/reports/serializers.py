@@ -7,7 +7,3 @@ class EnvironmentalIssueSerializer(serializers.ModelSerializer):
         fields = ['id', 'image', 'description', 'latitude', 'longitude', 'address']
 
 
-# class EnvironmentalIssueSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = EnvironmentalIssue
-#         fields = '__all__'

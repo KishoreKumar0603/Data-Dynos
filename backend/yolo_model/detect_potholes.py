@@ -5,8 +5,6 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from io import BytesIO
-
-# Load the model and processor from Hugging Face
 processor = AutoImageProcessor.from_pretrained("taroii/pothole-detection-model")
 model = AutoModelForImageClassification.from_pretrained("taroii/pothole-detection-model")
 
@@ -22,14 +20,14 @@ def detect_pothole(image_file):
 def assign_priority(predicted_class):
     if predicted_class == 1:
         return "Normal"
-    return None  # You can change this based on other predictions
+    return None
 
 
 def send_email_to_admin(image_file,predicted_class):
     priority_label = assign_priority(predicted_class)
 
-    latitude = 11.0611  # Example latitude
-    longitude = 77.0346  # Example longitude
+    latitude = 11.0611 
+    longitude = 77.0346
     user_name = "Kishore Kumar S" 
     user_phone = "9043479026"
     admin_email = "kkishore51565@gmail.com"
@@ -68,22 +66,20 @@ def send_email_to_admin(image_file,predicted_class):
     msg.attach(MIMEText(body, 'plain'))
 
     img_byte_arr = BytesIO()
-    image_file.seek(0)  # Ensure the file pointer is at the start
-    img_data = image_file.read()  # Read the image data
+    image_file.seek(0)
+    img_data = image_file.read() 
     img_byte_arr.write(img_data)
     img_byte_arr.seek(0)
 
     img_attachment = MIMEImage(img_byte_arr.read(), name="pothole_image.jpg")
     msg.attach(img_attachment)
 
-    # Send the email
     try:
-        # Establish connection to SMTP server (using Gmail in this case)
         server = smtplib.SMTP('smtp.gmail.com', 587)
-        server.starttls()  # Start TLS encryption
-        server.login(sender_email, password)  # Log into the email account
-        server.sendmail(sender_email, admin_email, msg.as_string())  # Send the email
-        server.quit()  # Close the connection
+        server.starttls() 
+        server.login(sender_email, password)
+        server.sendmail(sender_email, admin_email, msg.as_string()) 
+        server.quit() 
         print("Email sent successfully!")
     except Exception as e:
         print(f"Error occurred: {e}")
