@@ -3,9 +3,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../css/auth.css";
 
-const Login = () => {
+const Login = ({ setAuth }) => {
     const [credentials, setCredentials] = useState({ username: "", password: "" });
     const [message, setMessage] = useState("");
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -14,17 +15,30 @@ const Login = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        setMessage("");
+
         try {
-            const response = await axios.post("http://127.0.0.1:8000/api/accounts/login/", credentials);
+            const response = await axios.post("http://127.0.0.1:8000/api/login/", credentials);
 
             if (response.status === 200) {
-                localStorage.setItem("token", response.data.access);
-                localStorage.setItem("username", response.data.username);
-                setMessage("Login successful! Redirecting...");
-                setTimeout(() => navigate("/dashboard"), 2000);
+                const { token, user } = response.data; // Get token & user details
+
+                // Store authentication details
+                localStorage.setItem("token", token);
+                localStorage.setItem("user", JSON.stringify(user));
+
+                setAuth(true); // Notify App.jsx that user is authenticated
+                navigate("/"); // Redirect to Dashboard
             }
         } catch (error) {
-            setMessage("Invalid username or password.");
+            if (error.response) {
+                setMessage(error.response.data.message || "Invalid credentials.");
+            } else {
+                setMessage("Server error. Please try again.");
+            }
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -41,9 +55,11 @@ const Login = () => {
                         <input type="password" name="password" placeholder="Enter your password" required onChange={handleChange} />
 
                         <div className="text-center pt-4">
-                            <button className="btn mb-1 text-center" type="submit">LOGIN</button>
+                            <button className="btn mb-1 text-center" type="submit" disabled={loading}>
+                                {loading ? "Logging in..." : "LOGIN"}
+                            </button>
                             <p>Don't have an account? <a href="/signup">SIGNUP</a></p>
-                            <p>{message}</p>
+                            <p className="text-danger">{message}</p>
                         </div>
                     </form>
                 </div>
@@ -53,4 +69,3 @@ const Login = () => {
 };
 
 export default Login;
-0 

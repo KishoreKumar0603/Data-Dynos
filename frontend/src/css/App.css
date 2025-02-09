@@ -1,3 +1,22 @@
 nav{
   background-color: rgb(223, 223, 223);
 }
+.navbar-brand {
+  font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #f8d210 !important; /* Yellow hover effect */
+}
+
+.logout-btn {
+  transition: all 0.3s ease-in-out;
+}
+
+.logout-btn:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
